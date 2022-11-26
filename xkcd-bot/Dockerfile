@@ -5,10 +5,11 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["xkcd-bot/xkcd-bot.csproj", "xkcd-bot/"]
+COPY ["xkcd-bot.csproj", "xkcd-bot/"]
 RUN dotnet restore "xkcd-bot/xkcd-bot.csproj"
-COPY . .
+
 WORKDIR "/src/xkcd-bot"
+COPY . .
 RUN dotnet build "xkcd-bot.csproj" -c Release -o /app/build
 
 FROM build AS publish
