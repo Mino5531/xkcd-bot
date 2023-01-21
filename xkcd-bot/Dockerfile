@@ -18,4 +18,5 @@ RUN dotnet publish "xkcd-bot.csproj" -c Release -o /app/publish /p:UseAppHost=fa
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+VOLUME /app/config.json
 ENTRYPOINT ["dotnet", "xkcd-bot.dll"]
